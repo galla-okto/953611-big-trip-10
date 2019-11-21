@@ -593,4 +593,6 @@ const siteTripEventsElement = sitePageMainElement.querySelector(`.trip-events`);
 render(siteTripEventsElement, createFormTemplate(), `beforeend`);
 render(siteTripEventsElement, createFormEditTemplate(), `beforeend`);
 
-new Array(CARD_COUNT).fill(``).forEach(() => render(siteTripEventsElement, createCardTemplate(), `beforeend`));
+const getCardsTemplate = () => new Array(CARD_COUNT).fill(``).map(createCardTemplate).join(``);
+
+render(siteTripEventsElement, getCardsTemplate(), `beforeend`);
