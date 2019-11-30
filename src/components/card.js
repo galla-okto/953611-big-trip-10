@@ -33,7 +33,6 @@ export const createCardTemplate = () => {
             <span class="visually-hidden">Open event</span>
           </button>
         </div>
-      </li>
-    `
+      </li>`
   );
 };

@@ -49,6 +49,6 @@ export const createOffersTemplate = () => {
             </label>
           </div>
         </div>
-      </section>
-    `);
+      </section>`
+  );
 };
