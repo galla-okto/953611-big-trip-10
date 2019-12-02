@@ -1,15 +1,17 @@
-export const createCardTemplate = () => {
+export const createCardTemplate = (card) => {
+  const {type, town, photos, description, date, timeIn, timeOut, price, option} = card;
+
   return (`
       <li class="trip-events__item">
         <div class="event">
           <div class="event__type">
-            <img class="event__type-icon" width="42" height="42" src="img/icons/check-in.png" alt="Event type icon">
+            <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
           </div>
           <h3 class="event__title">Check into hotel</h3>
 
           <div class="event__schedule">
             <p class="event__time">
-              <time class="event__start-time" datetime="2019-03-18T12:25">12:25</time>
+              <time class="event__start-time" datetime="2019-03-18T12:25">${timeIn}</time>
               &mdash;
               <time class="event__end-time" datetime="2019-03-18T13:35">13:35</time>
             </p>
@@ -17,7 +19,7 @@ export const createCardTemplate = () => {
           </div>
 
           <p class="event__price">
-            &euro;&nbsp;<span class="event__price-value">600</span>
+            &euro;&nbsp;<span class="event__price-value">${price}</span>
           </p>
 
           <h4 class="visually-hidden">Offers:</h4>
