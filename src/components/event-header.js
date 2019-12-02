@@ -1,7 +1,12 @@
 import {formatDate} from '../utils.js';
 
 export const createEventHeaderTemplate = (card) => {
-  const {type, town, photos, description, date, timeIn, timeOut, price, option} = card;
+  const type = card.type;
+  const town = card.town;
+  const date = card.date;
+  const timeIn = card.timeIn;
+  const timeOut = card.timeOut;
+  const price = card.price;
 
   return (`
     <header class="event__header">

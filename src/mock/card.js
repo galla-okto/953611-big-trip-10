@@ -81,20 +81,20 @@ const getRandomTime = () => {
 const generateOption = () => {
   let options = [];
 
-  typesOffer.forEach(function(element) {
+  typesOffer.forEach(function (element) {
     options.push(Object.assign(
-      {checked: getRandomIntegerNumber(0, 2)},
-      {type: element},
-      {title: Titles[element]},
-      {price: getRandomArrayItem(Prices)}
-      ))
+        {checked: getRandomIntegerNumber(0, 2)},
+        {type: element},
+        {title: Titles[element]},
+        {price: getRandomArrayItem(Prices)}
+    ));
   });
 
   return options;
 };
 
 const generateDescription = () => {
-  return Descriptions[getRandomIntegerNumber(0, Descriptions.length-1)];
+  return Descriptions[getRandomIntegerNumber(0, Descriptions.length - 1)];
 };
 
 const generatePhoto = () => {
@@ -102,7 +102,7 @@ const generatePhoto = () => {
 };
 
 const getPhotos = () => {
-  return new Array(getRandomIntegerNumber(1,5)).fill(``).map(generatePhoto);
+  return new Array(getRandomIntegerNumber(1, 5)).fill(``).map(generatePhoto);
 };
 
 const generateCard = () => {

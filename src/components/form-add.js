@@ -1,6 +1,6 @@
-import { createEventHeaderTemplate } from './event-header.js';
-import { createOffersTemplate } from './offers.js';
-import { createDestinationTemplate } from './destination.js';
+import {createEventHeaderTemplate} from './event-header.js';
+import {createOffersTemplate} from './offers.js';
+import {createDestinationTemplate} from './destination.js';
 
 export const createFormAddTemplate = (card) => {
   return (`
