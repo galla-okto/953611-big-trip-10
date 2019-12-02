@@ -1,7 +1,7 @@
 export const calculatePriceTrip = (cards) => {
   let priceTrip = 0;
 
-  cards.forEach(element => {
+  cards.forEach((element) => {
     priceTrip = priceTrip + element.price;
   });
 
