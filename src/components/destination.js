@@ -6,7 +6,7 @@ const createPhotoMarkup = (photo) => {
 };
 
 const createListOfPhotosMarkup = (photos) => {
-  return photos.map(createPhotoMarkup).join(`\n`);;
+  return photos.map(createPhotoMarkup).join(`\n`);
 };
 
 export const createDestinationTemplate = (card) => {

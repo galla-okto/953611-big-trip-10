@@ -1,14 +1,14 @@
 import {formatDate} from '../utils.js';
 import {towns} from '../const.js';
 
-const CreateTownsOption = (it) => {
+const сreateTownsOption = (it) => {
   return `<option value="` + it + `"></option>`;
 };
 
 export const createEventHeaderTemplate = (card) => {
   const {type, town, date, timeIn, timeOut, price} = card;
 
-  const townsOption = towns.map((it) => CreateTownsOption(it)).join(`\n`);
+  const townsOption = towns.map((it) => сreateTownsOption(it)).join(`\n`);
 
   return (`
     <header class="event__header">
