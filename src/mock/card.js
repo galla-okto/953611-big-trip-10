@@ -1,6 +1,15 @@
-import {Towns} from '../const.js';
+import {towns} from '../const.js';
+import {getRandomArrayItem} from '../utils.js';
+import {getRandomIntegerNumber} from '../utils.js';
+import {getRandomDate} from '../utils.js';
+import {getRandomTime} from '../utils.js';
 
-const Types = [
+const MAX_NUMBER_PHOTOS = 5;
+const MAX_SIZE_DESCRIPTION = 3;
+const MIN_PRICE = 100;
+const MAX_PRICE = 1000;
+
+const types = [
   `bus`,
   `check-in`,
   `drive`,
@@ -14,7 +23,7 @@ const Types = [
   `trip`
 ];
 
-const Descriptions = [
+const descriptions = [
   `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
   `Cras aliquet varius magna, non porta ligula feugiat eget.`,
   `Fusce tristique felis at fermentum pharetra.`,
@@ -36,7 +45,7 @@ const typesOffer = [
   `train`
 ];
 
-const Titles = {
+const titleMap = {
   luggage: `Add luggage`,
   comfort: `Switch to comfort class`,
   meal: `Add meal`,
@@ -44,39 +53,12 @@ const Titles = {
   train: `Travel by train`
 };
 
-const Prices = [
+const prices = [
   `+10 €`,
   `+150 €`,
   `+2 €`,
   `+9 €`
 ];
-
-const getRandomArrayItem = (array) => {
-  const randomIndex = getRandomIntegerNumber(0, array.length);
-
-  return array[randomIndex];
-};
-
-const getRandomIntegerNumber = (min, max) => {
-  return min + Math.floor(max * Math.random());
-};
-
-const getRandomDate = () => {
-  const targetDate = new Date();
-
-  const sign = Math.random() > 0.5 ? 1 : -1;
-  const diffValue = sign * getRandomIntegerNumber(0, 5);
-
-  targetDate.setDate(targetDate.getDate() + diffValue);
-
-  return targetDate;
-};
-
-const getRandomTime = () => {
-  const targetDate = new Date();
-
-  return targetDate.getHours() + ` ` + targetDate.getMinutes();
-};
 
 const generateOption = () => {
   let options = [];
@@ -85,8 +67,8 @@ const generateOption = () => {
     options.push(Object.assign(
         {checked: getRandomIntegerNumber(0, 2)},
         {type: element},
-        {title: Titles[element]},
-        {price: getRandomArrayItem(Prices)}
+        {title: titleMap[element]},
+        {price: getRandomArrayItem(prices)}
     ));
   });
 
@@ -94,7 +76,7 @@ const generateOption = () => {
 };
 
 const generateDescription = () => {
-  return Descriptions[getRandomIntegerNumber(0, Descriptions.length - 1)];
+  return descriptions[getRandomIntegerNumber(0, descriptions.length - 1)];
 };
 
 const generatePhoto = () => {
@@ -102,20 +84,20 @@ const generatePhoto = () => {
 };
 
 const getPhotos = () => {
-  return new Array(getRandomIntegerNumber(1, 5)).fill(``).map(generatePhoto);
+  return new Array(getRandomIntegerNumber(1, MAX_NUMBER_PHOTOS)).fill(``).map(generatePhoto);
 };
 
 const generateCard = () => {
 
   return {
-    type: getRandomArrayItem(Types),
-    town: getRandomArrayItem(Towns),
+    type: getRandomArrayItem(types),
+    town: getRandomArrayItem(towns),
     photos: getPhotos(),
-    description: new Array(getRandomIntegerNumber(1, 3)).fill(``).map(generateDescription),
+    description: new Array(getRandomIntegerNumber(1, MAX_SIZE_DESCRIPTION)).fill(``).map(generateDescription),
     date: getRandomDate(),
     timeIn: getRandomTime(),
     timeOut: getRandomTime(),
-    price: getRandomIntegerNumber(100, 1000),
+    price: getRandomIntegerNumber(MIN_PRICE, MAX_PRICE),
     option: generateOption()
   };
 };

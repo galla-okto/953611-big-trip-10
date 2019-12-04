@@ -2,10 +2,9 @@ const filterNames = [
   `everything`, `future`, `past`
 ];
 
-const generateFilters = () => {
+export const generateFilters = () => {
   return filterNames.map((it) => {
     return {name: it};
   });
 };
 
-export {generateFilters};

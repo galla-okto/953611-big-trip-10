@@ -1,4 +1,4 @@
-export const MonthNames = [
+export const monthNames = [
   `JAN`,
   `FEB`,
   `MAR`,
@@ -13,8 +13,9 @@ export const MonthNames = [
   `DEC`,
 ];
 
-export const Towns = [
+export const towns = [
   `Geneva`,
   `Chamonix`,
-  `Amsterdam`
+  `Amsterdam`,
+  `Saint Petersburg`
 ];

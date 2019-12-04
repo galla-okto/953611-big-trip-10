@@ -5,11 +5,14 @@ const createPhotoMarkup = (photo) => {
   );
 };
 
-export const createDestinationTemplate = (card) => {
-  const photos = card.photos;
-  const description = card.description;
+const createListOfPhotosMarkup = (photos) => {
+  return photos.map(createPhotoMarkup).join(`\n`);;
+};
 
-  const photosMakeup = photos.map((it) => createPhotoMarkup(it)).join(`\n`);
+export const createDestinationTemplate = (card) => {
+  const {photos, description} = card;
+
+  const photosMakeup = createListOfPhotosMarkup(photos);
 
   return (`
     <section class="event__section  event__section--destination">

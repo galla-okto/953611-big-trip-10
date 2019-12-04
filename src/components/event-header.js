@@ -1,12 +1,14 @@
 import {formatDate} from '../utils.js';
+import {towns} from '../const.js';
+
+const CreateTownsOption = (it) => {
+  return `<option value="` + it + `"></option>`;
+};
 
 export const createEventHeaderTemplate = (card) => {
-  const type = card.type;
-  const town = card.town;
-  const date = card.date;
-  const timeIn = card.timeIn;
-  const timeOut = card.timeOut;
-  const price = card.price;
+  const {type, town, date, timeIn, timeOut, price} = card;
+
+  const townsOption = towns.map((it) => CreateTownsOption(it)).join(`\n`);
 
   return (`
     <header class="event__header">
@@ -84,10 +86,7 @@ export const createEventHeaderTemplate = (card) => {
         </label>
         <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${town}" list="destination-list-1">
         <datalist id="destination-list-1">
-          <option value="Amsterdam"></option>
-          <option value="Geneva"></option>
-          <option value="Chamonix"></option>
-          <option value="Saint Petersburg"></option>
+          ${townsOption}
         </datalist>
       </div>
 

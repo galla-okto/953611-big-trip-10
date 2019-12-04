@@ -1,7 +1,5 @@
 export const createCardTemplate = (card) => {
-  const type = card.type;
-  const timeIn = card.timeIn;
-  const price = card.price;
+  const {type, timeIn, price} = card;
 
   return (`
       <li class="trip-events__item">
