@@ -30,16 +30,18 @@ const renderCard = (card) => {
   const cardEditComponent = new CardEditComponent(card);
 
   const editButton = cardComponent.getElement().querySelector(`.event__rollup-btn`);
+
   editButton.addEventListener(`click`, () => {
-    siteTripEventsElement.replaceChild(cardEditComponent.getElement(), cardComponent.getElement());
+    CardListElement.replaceChild(cardEditComponent.getElement(), cardComponent.getElement());
   });
 
-  const editForm = CardEditComponent.getElement().querySelector(`.trip-events__item`);
+  const editForm = CardEditComponent.getElement().querySelector(`form`);
+
   editForm.addEventListener(`submit`, () => {
-    siteTripEventsElement.replaceChild(cardComponent.getElement(), cardEditComponent.getElement());
+    CardListElement.replaceChild(cardComponent.getElement(), cardEditComponent.getElement());
   });
 
-  render(siteTripEventsElement, cardComponent.getElement(), RenderPosition.BEFOREEND);
+  render(CardListElement, cardComponent.getElement(), RenderPosition.BEFOREEND);
 };
 
 const siteHeaderElement = document.querySelector(`.trip-main`);
@@ -63,34 +65,40 @@ render(siteTripControlsElement, new SiteMenuComponent(siteMenu).getElement(), Re
 const sitePageMainElement = document.querySelector(`.page-main`);
 const siteTripEventsElement = sitePageMainElement.querySelector(`.trip-events`);
 
+const CardListElement = siteTripEventsElement.querySelector(`.trip-days`);
+
 render2(siteTripEventsElement, createTripSortTemplate(), RenderPosition.BEFOREEND);
 
-const days = [];
+cards.forEach((card) => renderCard(card));
+
+//render(CardListElement, new CardComponent(card).getElement(), RenderPosition.BEFOREEND));
+
+/*const days = [];
 
 for (let index = 1; index < cards.length; index++) {
   days.push(cards[index].date);
 };
 
-days.sort();
+days.sort();*/
 
-render2(siteTripEventsElement, createTripDaysOpenTemplate(), `beforeend`);
+//render2(siteTripEventsElement, createTripDaysOpenTemplate(), `beforeend`);
 
-days.forEach((day) => {
-  render2(siteTripEventsElement, createTripDayOpenTemplate(day), `beforeend`);
+//days.forEach((day) => {
+  //render2(siteTripEventsElement, createTripDayOpenTemplate(day), `beforeend`);
 
-  for (let index = 1; index < cards.length; index++) {
-    if (day === cards[index].date) {
+  //for (let index = 1; index < cards.length; index++) {
+    //if (day === cards[index].date) {
 
-      renderCard(cards[index]);
+      //renderCard(cards[index]);
 
       //render(siteTripEventsElement, new Card(cards[index]).getElement(), RenderPosition.BEFOREEND);
 
       //render(siteTripEventsElement, new CardEdit(cards[index]).getElement(), RenderPosition.BEFOREEND);
-    }
-  };
+    //}
+  //};
 
-  render2(siteTripEventsElement, createTripDayCloseTemplate(), `beforeend`);
-});
+  //render2(siteTripEventsElement, createTripDayCloseTemplate(), `beforeend`);
+//});
 
-render2(siteTripEventsElement, createTripDaysCloseTemplate(), `beforeend`);
+//render2(siteTripEventsElement, createTripDaysCloseTemplate(), `beforeend`);
 

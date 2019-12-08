@@ -5,7 +5,7 @@ import {createDestinationTemplate} from './destination.js';
 import {createElement} from '../utils.js';
 
 const createCardEditTemplate = (card) => {
-  return (`<form class="trip-events__item  event  event--edit" action="#" method="post">`
+  return (`<form class="trip-events__item event event--edit" action="#" method="post">`
 
     + createEventHeaderTemplate(card) +
 
