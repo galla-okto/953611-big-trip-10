@@ -31,7 +31,7 @@ export default class Filter {
 
   getTemplate() {
     return createFilterTemplate(this._filters);
-  };
+  }
 
   getElement() {
     if (!this._element) {
@@ -39,9 +39,9 @@ export default class Filter {
     }
 
     return this._element;
-  };
+  }
 
   removeElement() {
     this._element = null;
   }
-};
+}

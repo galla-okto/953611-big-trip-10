@@ -27,7 +27,7 @@ export default class SiteMenu {
 
   getTemplate() {
     return createSiteMenuTemplate(this._siteMenu);
-  };
+  }
 
   getElement() {
     if (!this._element) {
@@ -35,9 +35,9 @@ export default class SiteMenu {
     }
 
     return this._element;
-  };
+  }
 
   removeElement() {
     this._element = null;
   }
-};
+}

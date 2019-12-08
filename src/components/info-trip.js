@@ -19,7 +19,7 @@ export default class InfoTrip {
 
   getTemplate() {
     return createInfoTripTemplate(this._infoTrip);
-  };
+  }
 
   getElement() {
     if (!this._element) {
@@ -27,9 +27,9 @@ export default class InfoTrip {
     }
 
     return this._element;
-  };
+  }
 
   removeElement() {
     this._element = null;
   }
-};
+}
