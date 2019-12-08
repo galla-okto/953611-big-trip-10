@@ -1,14 +1,15 @@
+import {createElement} from '../utils.js';
+
 const createSiteMenuMarkup = (siteMenu, isActive) => {
   const {name} = siteMenu;
 
   const active = isActive === 0 ? `trip-tabs__btn--active` : ``;
 
-  return (`
-    <a class="trip-tabs__btn ` + active + `" href="#">${name}</a>
+  return (`<a class="trip-tabs__btn ` + active + `" href="#">${name}</a>
   `);
 };
 
-export const createSiteMenuTemplate = (siteMenu) => {
+const createSiteMenuTemplate = (siteMenu) => {
   const siteMenuMarkup = siteMenu.map(createSiteMenuMarkup).join(`\n`);
 
   return (
@@ -16,4 +17,27 @@ export const createSiteMenuTemplate = (siteMenu) => {
     ${siteMenuMarkup}
   </nav>`
   );
+};
+
+export default class SiteMenu {
+  constructor(siteMenu) {
+    this._siteMenu = siteMenu;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createSiteMenuTemplate(this._siteMenu);
+  };
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  };
+
+  removeElement() {
+    this._element = null;
+  }
 };
