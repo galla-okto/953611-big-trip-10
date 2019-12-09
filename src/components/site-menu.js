@@ -12,8 +12,7 @@ const createSiteMenuMarkup = (siteMenu, isActive) => {
 const createSiteMenuTemplate = (siteMenu) => {
   const siteMenuMarkup = siteMenu.map(createSiteMenuMarkup).join(`\n`);
 
-  return (
-    `<nav class="trip-controls__trip-tabs  trip-tabs">
+  return (`<nav class="trip-controls__trip-tabs  trip-tabs">
     ${siteMenuMarkup}
   </nav>`
   );
