@@ -1,4 +1,4 @@
-import {formatDate} from '../utils.js';
+import {formatDate} from '../utils/common.js';
 
 const generateInfoTrip = (cards) => {
   const firstPoint = cards[0];

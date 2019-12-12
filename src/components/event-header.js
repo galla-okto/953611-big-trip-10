@@ -1,4 +1,4 @@
-import {formatDate} from '../utils.js';
+import {formatDate} from '../utils/common.js';
 import {towns} from '../const.js';
 
 const сreateTownsOption = (it) => {

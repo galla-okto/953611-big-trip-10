@@ -1,8 +1,8 @@
 import {towns} from '../const.js';
-import {getRandomArrayItem} from '../utils.js';
-import {getRandomIntegerNumber} from '../utils.js';
-import {getRandomDate} from '../utils.js';
-import {getRandomTime} from '../utils.js';
+import {getRandomArrayItem} from '../utils/common.js';
+import {getRandomIntegerNumber} from '../utils/common.js';
+import {getRandomDate} from '../utils/common.js';
+import {getRandomTime} from '../utils/common.js';
 
 const MAX_NUMBER_PHOTOS = 5;
 const MAX_SIZE_DESCRIPTION = 3;

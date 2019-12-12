@@ -12,7 +12,7 @@ import {generateCards} from './mock/card.js';
 import {generateSiteMenu} from './mock/site-menu.js';
 import {generateFilters} from './mock/filter.js';
 import {generateInfoTrip} from './mock/info-trip.js';
-import {render, RenderPosition} from './utils.js';
+import {render, RenderPosition} from './utils/render.js';
 
 const CARD_COUNT = 5;
 
@@ -27,16 +27,16 @@ const siteTripControlsElement = siteHeaderElement.querySelector(`.trip-controls`
 const cards = generateCards(CARD_COUNT);
 
 const infoTrip = generateInfoTrip(cards);
-render(siteTripInfoElement, new InfoTripComponent(infoTrip).getElement(), RenderPosition.AFTERBEGIN);
+render(siteTripInfoElement, new InfoTripComponent(infoTrip), RenderPosition.AFTERBEGIN);
 
 const priceTrip = calculatePriceTrip(cards);
 renderHtml(siteTripInfoElement, createPriceTripTemplate(priceTrip), RenderPosition.BEFOREEND);
 
 const filters = generateFilters();
-render(siteTripControlsElement, new FilterComponent(filters).getElement(), RenderPosition.AFTERBEGIN);
+render(siteTripControlsElement, new FilterComponent(filters), RenderPosition.AFTERBEGIN);
 
 const siteMenu = generateSiteMenu();
-render(siteTripControlsElement, new SiteMenuComponent(siteMenu).getElement(), RenderPosition.AFTERBEGIN);
+render(siteTripControlsElement, new SiteMenuComponent(siteMenu), RenderPosition.AFTERBEGIN);
 
 const sitePageMainElement = document.querySelector(`.page-main`);
 const siteTripEventsElement = sitePageMainElement.querySelector(`.trip-events`);
@@ -61,7 +61,7 @@ const renderCard = (card) => {
     CardListElement.replaceChild(cardComponent.getElement(), cardEditComponent.getElement());
   });
 
-  render(CardListElement, cardComponent.getElement(), RenderPosition.BEFOREEND);
+  render(CardListElement, cardComponent, RenderPosition.BEFOREEND);
 };
 
 cards.forEach((card) => renderCard(card));
