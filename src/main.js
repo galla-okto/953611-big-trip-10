@@ -49,15 +49,11 @@ const renderCard = (card) => {
   const cardComponent = new CardComponent(card);
   const cardEditComponent = new CardEditComponent(card);
 
-  const editButton = cardComponent.getElement().querySelector(`.event__rollup-btn`);
-
-  editButton.addEventListener(`click`, () => {
+  cardComponent.setEditButtonClickHandler(() => {
     CardListElement.replaceChild(cardEditComponent.getElement(), cardComponent.getElement());
   });
 
-  const editForm = cardEditComponent.getElement().querySelector(`form`);
-
-  editForm.addEventListener(`submit`, () => {
+  cardEditComponent.setSubmitHandler(() => {
     CardListElement.replaceChild(cardComponent.getElement(), cardEditComponent.getElement());
   });
 
