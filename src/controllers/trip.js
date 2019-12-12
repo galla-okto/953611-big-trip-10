@@ -21,7 +21,7 @@ const renderCard = (cardListElement, card) => {
 export default class TripController {
   constructor(container) {
     this._container = container;
-  };
+  }
 
   render(cards) {
     const sitePageMainElement = document.querySelector(`.page-main`);
