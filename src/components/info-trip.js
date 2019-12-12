@@ -1,4 +1,4 @@
-import {createElement} from '../utils.js';
+import AbstractComponent from './abstract-component.js';
 
 const createInfoTripTemplate = (infoTrip) => {
   const {nameTripTowns, nameTripDates} = infoTrip;
@@ -11,25 +11,14 @@ const createInfoTripTemplate = (infoTrip) => {
   );
 };
 
-export default class InfoTrip {
+export default class InfoTrip extends AbstractComponent {
   constructor(infoTrip) {
+    super();
+
     this._infoTrip = infoTrip;
-    this._element = null;
   }
 
   getTemplate() {
     return createInfoTripTemplate(this._infoTrip);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
