@@ -1,8 +1,7 @@
 import InfoTripComponent from './components/info-trip.js';
 import FilterComponent from './components/filter.js';
 import SiteMenuComponent from './components/site-menu.js';
-import CardComponent from './components/card.js';
-import CardEditComponent from './components/card-edit.js';
+import CardController from './controllers/trip.js';
 
 import {calculatePriceTrip} from './components/price-trip.js';
 import {createPriceTripTemplate} from './components/price-trip.js';
@@ -13,6 +12,9 @@ import {generateSiteMenu} from './mock/site-menu.js';
 import {generateFilters} from './mock/filter.js';
 import {generateInfoTrip} from './mock/info-trip.js';
 import {render, RenderPosition} from './utils/render.js';
+
+import TripComponent from './components/trip-events.js';
+import TripController from './controllers/trip.js';
 
 const CARD_COUNT = 5;
 
@@ -43,21 +45,6 @@ const siteTripEventsElement = sitePageMainElement.querySelector(`.trip-events`);
 
 renderHtml(siteTripEventsElement, createTripSortTemplate(), RenderPosition.BEFOREEND);
 
-const CardListElement = siteTripEventsElement.querySelector(`.trip-days`);
+const tripController = new TripController(TripComponent);
 
-const renderCard = (card) => {
-  const cardComponent = new CardComponent(card);
-  const cardEditComponent = new CardEditComponent(card);
-
-  cardComponent.setEditButtonClickHandler(() => {
-    CardListElement.replaceChild(cardEditComponent.getElement(), cardComponent.getElement());
-  });
-
-  cardEditComponent.setSubmitHandler(() => {
-    CardListElement.replaceChild(cardComponent.getElement(), cardEditComponent.getElement());
-  });
-
-  render(CardListElement, cardComponent, RenderPosition.BEFOREEND);
-};
-
-cards.forEach((card) => renderCard(card));
+tripController.render(cards);
