@@ -1,8 +1,7 @@
 import InfoTripComponent from './components/info-trip.js';
 import FilterComponent from './components/filter.js';
 import SiteMenuComponent from './components/site-menu.js';
-import CardComponent from './components/card.js';
-import CardEditComponent from './components/card-edit.js';
+import CardController from './controllers/trip.js';
 
 import {calculatePriceTrip} from './components/price-trip.js';
 import {createPriceTripTemplate} from './components/price-trip.js';
@@ -12,7 +11,10 @@ import {generateCards} from './mock/card.js';
 import {generateSiteMenu} from './mock/site-menu.js';
 import {generateFilters} from './mock/filter.js';
 import {generateInfoTrip} from './mock/info-trip.js';
-import {render, RenderPosition} from './utils.js';
+import {render, RenderPosition} from './utils/render.js';
+
+import TripComponent from './components/trip-events.js';
+import TripController from './controllers/trip.js';
 
 const CARD_COUNT = 5;
 
@@ -27,41 +29,22 @@ const siteTripControlsElement = siteHeaderElement.querySelector(`.trip-controls`
 const cards = generateCards(CARD_COUNT);
 
 const infoTrip = generateInfoTrip(cards);
-render(siteTripInfoElement, new InfoTripComponent(infoTrip).getElement(), RenderPosition.AFTERBEGIN);
+render(siteTripInfoElement, new InfoTripComponent(infoTrip), RenderPosition.AFTERBEGIN);
 
 const priceTrip = calculatePriceTrip(cards);
 renderHtml(siteTripInfoElement, createPriceTripTemplate(priceTrip), RenderPosition.BEFOREEND);
 
 const filters = generateFilters();
-render(siteTripControlsElement, new FilterComponent(filters).getElement(), RenderPosition.AFTERBEGIN);
+render(siteTripControlsElement, new FilterComponent(filters), RenderPosition.AFTERBEGIN);
 
 const siteMenu = generateSiteMenu();
-render(siteTripControlsElement, new SiteMenuComponent(siteMenu).getElement(), RenderPosition.AFTERBEGIN);
+render(siteTripControlsElement, new SiteMenuComponent(siteMenu), RenderPosition.AFTERBEGIN);
 
 const sitePageMainElement = document.querySelector(`.page-main`);
 const siteTripEventsElement = sitePageMainElement.querySelector(`.trip-events`);
 
 renderHtml(siteTripEventsElement, createTripSortTemplate(), RenderPosition.BEFOREEND);
 
-const CardListElement = siteTripEventsElement.querySelector(`.trip-days`);
+const tripController = new TripController(TripComponent);
 
-const renderCard = (card) => {
-  const cardComponent = new CardComponent(card);
-  const cardEditComponent = new CardEditComponent(card);
-
-  const editButton = cardComponent.getElement().querySelector(`.event__rollup-btn`);
-
-  editButton.addEventListener(`click`, () => {
-    CardListElement.replaceChild(cardEditComponent.getElement(), cardComponent.getElement());
-  });
-
-  const editForm = cardEditComponent.getElement().querySelector(`form`);
-
-  editForm.addEventListener(`submit`, () => {
-    CardListElement.replaceChild(cardComponent.getElement(), cardEditComponent.getElement());
-  });
-
-  render(CardListElement, cardComponent.getElement(), RenderPosition.BEFOREEND);
-};
-
-cards.forEach((card) => renderCard(card));
+tripController.render(cards);

@@ -2,7 +2,7 @@ import {createEventHeaderTemplate} from './event-header.js';
 import {createOffersTemplate} from './offers.js';
 import {createDestinationTemplate} from './destination.js';
 
-import {createElement} from '../utils.js';
+import AbstractComponent from './abstract-component.js';
 
 const createCardEditTemplate = (card) => {
   return (`<div>
@@ -16,25 +16,18 @@ const createCardEditTemplate = (card) => {
   </div>`);
 };
 
-export default class CardEdit {
+export default class CardEdit extends AbstractComponent {
   constructor(card) {
+    super();
+
     this._card = card;
-    this._element = null;
   }
 
   getTemplate() {
     return createCardEditTemplate(this._card);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
+  setSubmitHandler(handler) {
+    this.getElement().querySelector(`form`).addEventListener(`submit`, handler);
   }
 }

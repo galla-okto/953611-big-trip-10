@@ -1,4 +1,4 @@
-import {formatDate} from '../utils.js';
+import {formatDate} from '../utils/common.js';
 
 export const createTripDaysOpenTemplate = () => {
   return `<ul class="trip-days">`;
