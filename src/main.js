@@ -1,11 +1,12 @@
 import InfoTripComponent from './components/info-trip.js';
 import FilterComponent from './components/filter.js';
 import SiteMenuComponent from './components/site-menu.js';
-import CardController from './controllers/trip.js';
+import TripComponent from './components/trip-events.js';
+
+import {createTripSortTemplate} from './components/trip-sort.js';
 
 import {calculatePriceTrip} from './components/price-trip.js';
 import {createPriceTripTemplate} from './components/price-trip.js';
-import {createTripSortTemplate} from './components/trip-sort.js';
 
 import {generateCards} from './mock/card.js';
 import {generateSiteMenu} from './mock/site-menu.js';
@@ -13,7 +14,6 @@ import {generateFilters} from './mock/filter.js';
 import {generateInfoTrip} from './mock/info-trip.js';
 import {render, RenderPosition} from './utils/render.js';
 
-import TripComponent from './components/trip-events.js';
 import TripController from './controllers/trip.js';
 
 const CARD_COUNT = 5;
@@ -43,8 +43,11 @@ render(siteTripControlsElement, new SiteMenuComponent(siteMenu), RenderPosition.
 const sitePageMainElement = document.querySelector(`.page-main`);
 const siteTripEventsElement = sitePageMainElement.querySelector(`.trip-events`);
 
-renderHtml(siteTripEventsElement, createTripSortTemplate(), RenderPosition.BEFOREEND);
+renderHtml(siteTripEventsElement, createTripSortTemplate(), RenderPosition.AFTERBEGIN);
 
-const tripController = new TripController(TripComponent);
+const tripComponent = new TripComponent;
+render(siteTripEventsElement, tripComponent, RenderPosition.BEFOREEND);
+
+const tripController = new TripController(tripComponent);
 
 tripController.render(cards);

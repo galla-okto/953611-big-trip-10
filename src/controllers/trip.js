@@ -24,10 +24,8 @@ export default class TripController {
   }
 
   render(cards) {
-    const sitePageMainElement = document.querySelector(`.page-main`);
-    const siteTripEventsElement = sitePageMainElement.querySelector(`.trip-events`);
-    const cardListElement = siteTripEventsElement.querySelector(`.trip-days`);
+    const container = this._container.getElement();
 
-    cards.forEach((card) => renderCard(cardListElement, card));
+    cards.forEach((card) => renderCard(container, card));
   }
 }
