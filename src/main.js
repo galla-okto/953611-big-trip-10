@@ -1,7 +1,7 @@
 import InfoTripComponent from './components/info-trip.js';
 import FilterComponent from './components/filter.js';
 import SiteMenuComponent from './components/site-menu.js';
-import TripComponent from './components/trip-events.js';
+import TripDaysComponent from './components/trip-days.js';
 
 import {createTripSortTemplate} from './components/trip-sort.js';
 
@@ -45,9 +45,9 @@ const siteTripEventsElement = sitePageMainElement.querySelector(`.trip-events`);
 
 renderHtml(siteTripEventsElement, createTripSortTemplate(), RenderPosition.AFTERBEGIN);
 
-const tripComponent = new TripComponent;
-render(siteTripEventsElement, tripComponent, RenderPosition.BEFOREEND);
+const tripDaysComponent = new TripDaysComponent;
+render(siteTripEventsElement, tripDaysComponent, RenderPosition.BEFOREEND);
 
-const tripController = new TripController(tripComponent);
+const tripController = new TripController(tripDaysComponent);
 
 tripController.render(cards);
