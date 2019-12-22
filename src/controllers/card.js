@@ -33,12 +33,6 @@ export default class CardController {
       document.addEventListener(`keydown`, this._onEscKeyDown);
     });
 
-    /*this._cardComponent.setArchiveButtonClickHandler(() => {
-      this._onDataChange(this, card, Object.assign({}, card, {
-        isArchive: !card.isArchive,
-      }));
-    });*/
-
     this._cardEditComponent.setFavoritesButtonClickHandler(() => {
       this._onDataChange(this, card, Object.assign({}, card, {
         isFavorite: !card.isFavorite,
