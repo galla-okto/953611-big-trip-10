@@ -39,11 +39,11 @@ export default class CardController {
       }));
     });*/
 
-    /*this._cardComponent.setFavoritesButtonClickHandler(() => {
+    this._cardEditComponent.setFavoritesButtonClickHandler(() => {
       this._onDataChange(this, card, Object.assign({}, card, {
         isFavorite: !card.isFavorite,
       }));
-    });*/
+    });
 
     this._cardEditComponent.setSubmitHandler(() => this._replaceEditToCard());
 

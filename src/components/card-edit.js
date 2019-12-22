@@ -6,7 +6,7 @@ import AbstractComponent from './abstract-component.js';
 
 const createCardEditTemplate = (card) => {
   return (`<div>
-  <form class="trip-events__item event event--edit" action="#" method="post">
+  <form class="event event--edit" action="#" method="post">
   ${createEventHeaderTemplate(card)}
   <section class="event__details">
   ${createOffersTemplate(card)}
@@ -29,5 +29,9 @@ export default class CardEdit extends AbstractComponent {
 
   setSubmitHandler(handler) {
     this.getElement().querySelector(`form`).addEventListener(`submit`, handler);
+  }
+
+  setFavoritesButtonClickHandler(handler) {
+    this.getElement().querySelector(`.event__favorite-checkbox`).addEventListener(`change`, handler);
   }
 }

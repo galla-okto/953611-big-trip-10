@@ -17,38 +17,6 @@ const renderCards = (cardListElement, cards, onDataChange, onViewChange) => {
   });
 };
 
-/*const renderCard = (cardListElement, card) => {
-  const onEscKeyDown = (evt) => {
-    const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
-
-    if (isEscKey) {
-      replaceEditToCard();
-      document.removeEventListener(`keydown`, onEscKeyDown);
-    }
-  };
-
-  const replaceEditToCard = () => {
-    replace(cardComponent, cardEditComponent);
-  };
-
-  const replaceCardToEdit = () => {
-    replace(cardEditComponent, cardComponent);
-  };
-
-  const cardComponent = new CardComponent(card);
-
-  cardComponent.setEditButtonClickHandler(() => {
-    replaceCardToEdit();
-    document.addEventListener(`keydown`, onEscKeyDown);
-  });
-
-  const cardEditComponent = new CardEditComponent(card);
-
-  cardEditComponent.setSubmitHandler(replaceEditToCard);
-
-  render(cardListElement, cardComponent, RenderPosition.BEFOREEND);
-};*/
-
 export default class TripController {
   constructor(container) {
     this._container = container;
@@ -72,30 +40,22 @@ export default class TripController {
   }
 
   _onDataChange(cardController, oldData, newData) {
-    /*const index = this._cards.findIndex((it) => it === oldData);
+    const index = this._cards.findIndex((it) => it === oldData);
 
     if (index === -1) {
       return;
     }
 
+    console.log(this._cards);
+
     this._cards = [].concat(this._cards.slice(0, index), newData, this._cards.slice(index + 1));
 
-    cardController.render(this._cards[index]);*/
+    console.log(this._cards);
+
+    cardController.render(this._cards[index]);
   }
 
   _onViewChange() {
     //this._showedCardControllers.forEach((it) => it.setDefaultView());
   }
 }
-
-/*export default class TripController {
-  constructor(container) {
-    this._container = container;
-  }
-
-  render(cards) {
-    const container = this._container.getElement();
-
-    cards.forEach((card) => renderCard(container, card));
-  }
-}*/
