@@ -1,6 +1,19 @@
 import {formatDate} from '../utils/common.js';
 import {towns} from '../const.js';
 
+const placeholder = {
+  taxi: `Taxi to`,
+  bus: `Bus to`,
+  train: `Train to`,
+  ship: `Ship to`,
+  transport: `Transport to`,
+  drive: `Drive to`,
+  flight: `Flight to`,
+  checkIn: `Check into`,
+  sightseeing: `Sightseeing at`,
+  restaurant: `Eat at`
+};
+
 const сreateTownsOption = (it) => {
   return `<option value="` + it + `"></option>`;
 };
@@ -9,17 +22,22 @@ const getIsFavorite = (isFavorite) => {
   return isFavorite ? `checked=""` : ``;
 };
 
-export const createEventHeaderTemplate = (card) => {
-  const {type, town, date, timeIn, timeOut, price, isFavorite} = card;
+const getPlaceholder = (eventType) => {
+  return placeholder[eventType];
+};
+
+export const createEventHeaderTemplate = (card, eventType) => {
+  const {town, date, timeIn, timeOut, price, isFavorite} = card;
 
   const townsOption = towns.map((it) => сreateTownsOption(it)).join(`\n`);
+  const placeholder = getPlaceholder(eventType);
 
   return (`
     <header class="event__header">
       <div class="event__type-wrapper">
         <label class="event__type  event__type-btn" for="event-type-toggle-1">
           <span class="visually-hidden">Choose event type</span>
-          <img class="event__type-icon" width="17" height="17" src="img/icons/${type}.png" alt="Event type icon">
+          <img class="event__type-icon" width="17" height="17" src="img/icons/${eventType}.png" alt="Event type icon">
         </label>
         <input class="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox">
 
@@ -86,7 +104,7 @@ export const createEventHeaderTemplate = (card) => {
 
       <div class="event__field-group  event__field-group--destination">
         <label class="event__label  event__type-output" for="event-destination-1">
-          Sightseeing at
+          ${placeholder}
         </label>
         <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${town}" list="destination-list-1">
         <datalist id="destination-list-1">

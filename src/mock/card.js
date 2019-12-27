@@ -109,4 +109,4 @@ const generateCards = (count) => {
     .map(generateCard);
 };
 
-export {generateCard, generateCards};
+export {generateCard, generateCards, generateOption, generateDescription};
