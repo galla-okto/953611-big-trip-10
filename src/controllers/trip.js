@@ -15,6 +15,7 @@ export default class TripController {
     this._container = container;
 
     this._cards = [];
+    this._showedCardsControllers = [];
     this._onDataChange = this._onDataChange.bind(this);
     this._onViewChange = this._onViewChange.bind(this);
   }
@@ -25,6 +26,7 @@ export default class TripController {
     const container = this._container.getElement();
 
     const newCards = renderCards(container, this._cards, this._onDataChange, this._onViewChange);
+    this._showedCardsControllers = this._showedCardsControllers.concat(newCards);
   }
 
   _onDataChange(cardController, oldData, newData) {
@@ -44,6 +46,6 @@ export default class TripController {
   }
 
   _onViewChange() {
-
+    this._showedCardsControllers.forEach((it) => it.setDefaultView());
   }
 }
