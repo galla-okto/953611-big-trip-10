@@ -42,8 +42,6 @@ export default class CardEdit extends AbstractSmartComponent {
 
   rerender() {
     super.rerender();
-
-    //this._applyFlatpickr();
   }
 
   setSubmitHandler(handler) {

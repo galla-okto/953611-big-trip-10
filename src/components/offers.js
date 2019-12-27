@@ -24,8 +24,7 @@ const createOptionMarkup = (options) => {
 };
 
 export const createOffersTemplate = (card, eventType) => {
-  //const {option} = card;
-  const option = generateOption();
+  const option = generateOption(eventType);
 
   const optionMakeup = createOptionMarkup(option);
 

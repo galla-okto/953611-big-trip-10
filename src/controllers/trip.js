@@ -36,11 +36,7 @@ export default class TripController {
       return;
     }
 
-    console.log(this._cards);
-
     this._cards = [].concat(this._cards.slice(0, index), newData, this._cards.slice(index + 1));
-
-    console.log(this._cards);
 
     cardController.render(this._cards[index]);
   }

@@ -12,7 +12,7 @@ export const createDestinationTemplate = (card, destination) => {
   const {photos} = card;
 
   const photosMakeup = createListOfPhotosMarkup(photos);
-  const description = generateDescription();
+  const description = generateDescription(destination);
 
   return (`
     <section class="event__section  event__section--destination">

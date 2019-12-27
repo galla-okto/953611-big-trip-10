@@ -75,7 +75,7 @@ const generateOption = () => {
   return options;
 };
 
-const generateDescription = () => {
+const generateDescription = (destination) => {
   return descriptions[getRandomIntegerNumber(0, descriptions.length - 1)];
 };
 
