@@ -1,3 +1,5 @@
+import {generateOption} from '../mock/card.js';
+
 const createOfferTemplate = (element) => {
   return `
     <div class="event__offer-selector">
@@ -21,8 +23,8 @@ const createOptionMarkup = (options) => {
   return optionMakeup;
 };
 
-export const createOffersTemplate = (card) => {
-  const {option} = card;
+export const createOffersTemplate = (card, eventType) => {
+  const option = generateOption(eventType);
 
   const optionMakeup = createOptionMarkup(option);
 

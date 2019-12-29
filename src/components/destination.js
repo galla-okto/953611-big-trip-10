@@ -1,3 +1,5 @@
+import {generateDescription} from '../mock/card.js';
+
 const createPhotoMarkup = (photo) => {
   return (`<img class="event__photo" src="${photo}" alt="Event photo">`);
 };
@@ -6,10 +8,11 @@ const createListOfPhotosMarkup = (photos) => {
   return photos.map(createPhotoMarkup).join(`\n`);
 };
 
-export const createDestinationTemplate = (card) => {
-  const {photos, description} = card;
+export const createDestinationTemplate = (card, destination) => {
+  const {photos} = card;
 
   const photosMakeup = createListOfPhotosMarkup(photos);
+  const description = generateDescription(destination);
 
   return (`
     <section class="event__section  event__section--destination">

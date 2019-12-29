@@ -98,7 +98,8 @@ const generateCard = () => {
     timeIn: getRandomTime(),
     timeOut: getRandomTime(),
     price: getRandomIntegerNumber(MIN_PRICE, MAX_PRICE),
-    option: generateOption()
+    option: generateOption(),
+    isFavorite: true
   };
 };
 
@@ -108,4 +109,4 @@ const generateCards = (count) => {
     .map(generateCard);
 };
 
-export {generateCard, generateCards};
+export {generateCard, generateCards, generateOption, generateDescription};

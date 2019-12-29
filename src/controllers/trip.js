@@ -1,33 +1,47 @@
-import CardComponent from '../components/card.js';
-import CardEditComponent from '../components/card-edit.js';
+import CardController from './card.js';
 
-import {render, RenderPosition} from '../utils/render.js';
+const renderCards = (cardListElement, cards, onDataChange, onViewChange) => {
+  return cards.map((card) => {
+    const cardController = new CardController(cardListElement, onDataChange, onViewChange);
 
-const renderCard = (cardListElement, card) => {
-  const cardComponent = new CardComponent(card);
-  const cardEditComponent = new CardEditComponent(card);
+    cardController.render(card);
 
-  cardComponent.setEditButtonClickHandler(() => {
-    cardListElement.replaceChild(cardEditComponent.getElement(), cardComponent.getElement());
+    return cardController;
   });
-
-  cardEditComponent.setSubmitHandler(() => {
-    cardListElement.replaceChild(cardComponent.getElement(), cardEditComponent.getElement());
-  });
-
-  render(cardListElement, cardComponent, RenderPosition.BEFOREEND);
 };
 
 export default class TripController {
   constructor(container) {
     this._container = container;
+
+    this._cards = [];
+    this._showedCardsControllers = [];
+    this._onDataChange = this._onDataChange.bind(this);
+    this._onViewChange = this._onViewChange.bind(this);
   }
 
   render(cards) {
-    const sitePageMainElement = document.querySelector(`.page-main`);
-    const siteTripEventsElement = sitePageMainElement.querySelector(`.trip-events`);
-    const cardListElement = siteTripEventsElement.querySelector(`.trip-days`);
+    this._cards = cards;
 
-    cards.forEach((card) => renderCard(cardListElement, card));
+    const container = this._container.getElement();
+
+    const newCards = renderCards(container, this._cards, this._onDataChange, this._onViewChange);
+    this._showedCardsControllers = this._showedCardsControllers.concat(newCards);
+  }
+
+  _onDataChange(cardController, oldData, newData) {
+    const index = this._cards.findIndex((it) => it === oldData);
+
+    if (index === -1) {
+      return;
+    }
+
+    this._cards = [].concat(this._cards.slice(0, index), newData, this._cards.slice(index + 1));
+
+    cardController.render(this._cards[index]);
+  }
+
+  _onViewChange() {
+    this._showedCardsControllers.forEach((it) => it.setDefaultView());
   }
 }
