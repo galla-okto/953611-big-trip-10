@@ -1,10 +1,12 @@
 import PointController from './point.js';
+import TripDaysComponent from '../components/trip-days.js';
+import { render, RenderPosition } from '../utils/render.js';
 
-const renderCards = (cardListElement, cards, onDataChange, onViewChange) => {
-  return cards.map((card) => {
-    const pointController = new PointController(cardListElement, onDataChange, onViewChange);
+const renderPoints = (pointListElement, points, onDataChange, onViewChange) => {
+  return points.map((point) => {
+    const pointController = new PointController(pointListElement, onDataChange, onViewChange);
 
-    pointController.render(card);
+    pointController.render(point);
 
     return pointController;
   });
@@ -15,21 +17,40 @@ export default class TripController {
     this._container = container;
     this._pointsModel = pointsModel;
 
-    this._showedCardsControllers = [];
+    this._showedPointsControllers = [];
+    this._pointsComponent = new TripDaysComponent();
+
     this._onDataChange = this._onDataChange.bind(this);
     this._onViewChange = this._onViewChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+
+    this._pointsModel.setFilterChangeHandler(this._onFilterChange);
   }
 
   render() {
     const container = this._container.getElement();
     const points = this._pointsModel.getPoints();
 
-    const newCards = renderCards(container, points, this._onDataChange, this._onViewChange);
-    this._showedCardsControllers = this._showedCardsControllers.concat(newCards);
+    render(container, this._pointsComponent, RenderPosition.BEFOREEND);
+
+    this._renderPoints(points);
+  }
+
+  _removePoints() {
+    const pointListElement = this._pointsComponent.getElement();
+
+    pointListElement.innerHTML = ``;
+    this._showedPointsControllers = [];
+  }
+
+  _renderPoints(points) {
+    const pointListElement = this._pointsComponent.getElement();
+
+    const newPoints = renderPoints(pointListElement, points, this._onDataChange, this._onViewChange);
+    this._showedPointsControllers = this._showedPointsControllers.concat(newPoints);
   }
 
   _onDataChange(pointController, oldData, newData) {
-    //const index = this._cards.findIndex((it) => it === oldData);
     const isSuccess = this._pointsModel.updatePoint(oldData.id, newData);
 
     if (isSuccess) {
@@ -38,6 +59,11 @@ export default class TripController {
   }
 
   _onViewChange() {
-    this._showedCardsControllers.forEach((it) => it.setDefaultView());
+    this._showedPointsControllers.forEach((it) => it.setDefaultView());
+  }
+
+  _onFilterChange() {
+    this._removePoints();
+    this._renderPoints(this._pointsModel.getPoints());
   }
 }
