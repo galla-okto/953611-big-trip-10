@@ -1,5 +1,13 @@
 export default class Points {
   constructor() {
-    this._cards = [];
+    this._points = [];
+  }
+
+  getPoints() {
+    return this._points;
+  }
+
+  setPoints(points) {
+    this._points = Array.from(points);
   }
 }
