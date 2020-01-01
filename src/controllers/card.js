@@ -7,7 +7,7 @@ const Mode = {
   EDIT: `edit`,
 };
 
-export default class CardController {
+export default class PointController {
   constructor(container, onDataChange, onViewChange) {
     this._container = container;
     this._onDataChange = onDataChange;

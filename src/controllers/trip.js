@@ -1,12 +1,12 @@
-import CardController from './card.js';
+import PointController from './card.js';
 
 const renderCards = (cardListElement, cards, onDataChange, onViewChange) => {
   return cards.map((card) => {
-    const cardController = new CardController(cardListElement, onDataChange, onViewChange);
+    const pointController = new PointController(cardListElement, onDataChange, onViewChange);
 
-    cardController.render(card);
+    pointController.render(card);
 
-    return cardController;
+    return pointController;
   });
 };
 
@@ -29,7 +29,7 @@ export default class TripController {
     this._showedCardsControllers = this._showedCardsControllers.concat(newCards);
   }
 
-  _onDataChange(cardController, oldData, newData) {
+  _onDataChange(pointController, oldData, newData) {
     const index = this._cards.findIndex((it) => it === oldData);
 
     if (index === -1) {
@@ -38,7 +38,7 @@ export default class TripController {
 
     this._cards = [].concat(this._cards.slice(0, index), newData, this._cards.slice(index + 1));
 
-    cardController.render(this._cards[index]);
+    pointController.render(this._cards[index]);
   }
 
   _onViewChange() {
