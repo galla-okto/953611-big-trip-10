@@ -1,4 +1,4 @@
-import PointController from './card.js';
+import PointController from './point.js';
 
 const renderCards = (cardListElement, cards, onDataChange, onViewChange) => {
   return cards.map((card) => {
