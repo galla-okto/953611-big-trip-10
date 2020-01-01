@@ -8,6 +8,8 @@ import {createTripSortTemplate} from './components/trip-sort.js';
 import {calculatePriceTrip} from './components/price-trip.js';
 import {createPriceTripTemplate} from './components/price-trip.js';
 
+import PointssModel from './models/points.js';
+
 import {generateCards} from './mock/card.js';
 import {generateSiteMenu} from './mock/site-menu.js';
 import {generateFilters} from './mock/filter.js';
@@ -27,6 +29,8 @@ const siteTripInfoElement = siteHeaderElement.querySelector(`.trip-info`);
 const siteTripControlsElement = siteHeaderElement.querySelector(`.trip-controls`);
 
 const cards = generateCards(CARD_COUNT);
+const pointsModel = new PointsModel();
+pointsModel.setPoints(cards);
 
 const infoTrip = generateInfoTrip(cards);
 render(siteTripInfoElement, new InfoTripComponent(infoTrip), RenderPosition.AFTERBEGIN);
