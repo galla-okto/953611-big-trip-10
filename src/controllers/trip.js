@@ -11,34 +11,30 @@ const renderCards = (cardListElement, cards, onDataChange, onViewChange) => {
 };
 
 export default class TripController {
-  constructor(container) {
+  constructor(container, pointsModel) {
     this._container = container;
+    this._pointsModel = pointsModel;
 
-    this._cards = [];
     this._showedCardsControllers = [];
     this._onDataChange = this._onDataChange.bind(this);
     this._onViewChange = this._onViewChange.bind(this);
   }
 
-  render(cards) {
-    this._cards = cards;
-
+  render() {
     const container = this._container.getElement();
+    const points = this._pointsModel.getPoints();
 
-    const newCards = renderCards(container, this._cards, this._onDataChange, this._onViewChange);
+    const newCards = renderCards(container, points, this._onDataChange, this._onViewChange);
     this._showedCardsControllers = this._showedCardsControllers.concat(newCards);
   }
 
   _onDataChange(pointController, oldData, newData) {
-    const index = this._cards.findIndex((it) => it === oldData);
+    //const index = this._cards.findIndex((it) => it === oldData);
+    const isSuccess = this._pointsModel.updatePoint(oldData.id, newData);
 
-    if (index === -1) {
-      return;
+    if (isSuccess) {
+      pointController.render(newData);
     }
-
-    this._cards = [].concat(this._cards.slice(0, index), newData, this._cards.slice(index + 1));
-
-    pointController.render(this._cards[index]);
   }
 
   _onViewChange() {

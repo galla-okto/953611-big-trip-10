@@ -8,7 +8,7 @@ import {createTripSortTemplate} from './components/trip-sort.js';
 import {calculatePriceTrip} from './components/price-trip.js';
 import {createPriceTripTemplate} from './components/price-trip.js';
 
-import PointssModel from './models/points.js';
+import PointsModel from './models/points.js';
 
 import {generateCards} from './mock/card.js';
 import {generateSiteMenu} from './mock/site-menu.js';
@@ -52,6 +52,6 @@ renderHtml(siteTripEventsElement, createTripSortTemplate(), RenderPosition.AFTER
 const tripDaysComponent = new TripDaysComponent;
 render(siteTripEventsElement, tripDaysComponent, RenderPosition.BEFOREEND);
 
-const tripController = new TripController(tripDaysComponent);
+const tripController = new TripController(tripDaysComponent, pointsModel);
 
-tripController.render(cards);
+tripController.render();
