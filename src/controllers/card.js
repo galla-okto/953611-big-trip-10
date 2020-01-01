@@ -39,7 +39,10 @@ export default class CardController {
       }));
     });
 
-    this._cardEditComponent.setSubmitHandler(() => this._replaceEditToCard());
+    this._cardEditComponent.setSubmitHandler((evt) => {
+      evt.preventDefault();
+      this._replaceEditToCard();
+    });
 
     if (oldCardEditComponent && oldCardComponent) {
       replace(this._cardComponent, oldCardComponent);
@@ -56,7 +59,10 @@ export default class CardController {
   }
 
   _replaceEditToCard() {
+    document.removeEventListener(`keydown`, this._onEscKeyDown);
+
     replace(this._cardComponent, this._cardEditComponent);
+
     this._mode = Mode.DEFAULT;
   }
 

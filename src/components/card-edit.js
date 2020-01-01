@@ -9,7 +9,7 @@ const createCardEditTemplate = (card, options = {}) => {
 
   return (`<div>
   <form class="event event--edit" action="#" method="post">
-  ${createEventHeaderTemplate(card, activeEventType)}
+  ${createEventHeaderTemplate(card, activeEventType, activeDestination)}
   <section class="event__details">
   ${createOffersTemplate(card, activeEventType)}
   ${createDestinationTemplate(card, activeDestination)}
@@ -24,7 +24,8 @@ export default class CardEdit extends AbstractSmartComponent {
 
     this._card = card;
     this._activeEventType = card.type;
-    this._activeDestination = card.destination;
+    this._activeDestination = card.town;
+    this._submitHandler = null;
 
     this._subscribeOnEvents();
   }
@@ -37,6 +38,7 @@ export default class CardEdit extends AbstractSmartComponent {
   }
 
   recoveryListeners() {
+    this.setSubmitHandler(this._submitHandler);
     this._subscribeOnEvents();
   }
 
@@ -46,6 +48,8 @@ export default class CardEdit extends AbstractSmartComponent {
 
   setSubmitHandler(handler) {
     this.getElement().querySelector(`form`).addEventListener(`submit`, handler);
+
+    this._submitHandler = handler;
   }
 
   setFavoritesButtonClickHandler(handler) {
