@@ -1,5 +1,5 @@
 import InfoTripComponent from './components/info-trip.js';
-import FilterComponent from './components/filter.js';
+import FilterController from './controllers/filter.js';
 import SiteMenuComponent from './components/site-menu.js';
 import TripDaysComponent from './components/trip-days.js';
 
@@ -38,8 +38,8 @@ render(siteTripInfoElement, new InfoTripComponent(infoTrip), RenderPosition.AFTE
 const priceTrip = calculatePriceTrip(cards);
 renderHtml(siteTripInfoElement, createPriceTripTemplate(priceTrip), RenderPosition.BEFOREEND);
 
-const filters = generateFilters();
-render(siteTripControlsElement, new FilterComponent(filters), RenderPosition.AFTERBEGIN);
+const filterController = new FilterController(siteTripControlsElement, pointsModel);
+filterController.render();
 
 const siteMenu = generateSiteMenu();
 render(siteTripControlsElement, new SiteMenuComponent(siteMenu), RenderPosition.AFTERBEGIN);
