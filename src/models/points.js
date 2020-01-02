@@ -6,6 +6,7 @@ export default class Points {
     this._points = [];
     this._activeFilterType = FilterType.EVERYTHING;
 
+    this._dataChangeHandlers = [];
     this._filterChangeHandlers = [];
   }
 
@@ -35,10 +36,16 @@ export default class Points {
 
     this._points = [].concat(this._points.slice(0, index), point, this._points.slice(index + 1));
 
+    this._dataChangeHandlers.forEach((handler) => handler());
+
     return true;
   }
 
   setFilterChangeHandler(handler) {
     this._filterChangeHandlers.push(handler);
+  }
+
+  setDataChangeHandler(handler) {
+    this._dataChangeHandlers.push(handler);
   }
 }

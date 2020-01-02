@@ -39,10 +39,12 @@ export default class PointController {
       }));
     });
 
-    this._cardEditComponent.setSubmitHandler((evt) => {
+    /*this._cardEditComponent.setSubmitHandler((evt) => {
       evt.preventDefault();
       this._replaceEditToCard();
-    });
+    });*/
+
+    this._cardEditComponent.setSubmitHandler(() => this._replaceEditToCard());
 
     if (oldCardEditComponent && oldCardComponent) {
       replace(this._cardComponent, oldCardComponent);
