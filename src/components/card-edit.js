@@ -26,6 +26,7 @@ export default class CardEdit extends AbstractSmartComponent {
     this._activeEventType = card.type;
     this._activeDestination = card.town;
     this._submitHandler = null;
+    this._deleteButtonClickHandler = null;
 
     this._subscribeOnEvents();
   }
@@ -37,8 +38,13 @@ export default class CardEdit extends AbstractSmartComponent {
     });
   }
 
+  removeElement() {
+    super.removeElement();
+  }
+
   recoveryListeners() {
     this.setSubmitHandler(this._submitHandler);
+    this.setDeleteButtonClickHandler(this._deleteButtonClickHandler);
     this._subscribeOnEvents();
   }
 
@@ -50,6 +56,12 @@ export default class CardEdit extends AbstractSmartComponent {
     this.getElement().querySelector(`form`).addEventListener(`submit`, handler);
 
     this._submitHandler = handler;
+  }
+
+  setDeleteButtonClickHandler(handler) {
+    this.getElement().querySelector(`.event__reset-btn`).addEventListener(`click`, handler);
+
+    this._deleteButtonClickHandler = handler;
   }
 
   setFavoritesButtonClickHandler(handler) {
