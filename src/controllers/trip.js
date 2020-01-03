@@ -1,6 +1,6 @@
 import PointController from './point.js';
 import TripDaysComponent from '../components/trip-days.js';
-import { render, RenderPosition } from '../utils/render.js';
+import {render, RenderPosition} from '../utils/render.js';
 
 const renderPoints = (pointListElement, points, onDataChange, onViewChange) => {
   return points.map((point) => {

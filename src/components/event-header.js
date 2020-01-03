@@ -27,7 +27,7 @@ const getPlaceholder = (eventType) => {
 };
 
 export const createEventHeaderTemplate = (card, eventType, eventTown) => {
-  const {town, date, timeIn, timeOut, price, isFavorite} = card;
+  const {date, timeIn, timeOut, price, isFavorite} = card;
 
   const townsOption = towns.map((it) => сreateTownsOption(it)).join(`\n`);
   const placeholderText = getPlaceholder(eventType);
