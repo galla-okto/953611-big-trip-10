@@ -7,6 +7,20 @@ const Mode = {
   EDIT: `edit`,
 };
 
+export const EmptyPoint = {
+    id: null,
+    type: null,
+    town: null,
+    photos: [],
+    description: ``,
+    date: null,
+    timeIn: null,
+    timeOut: null,
+    price: null,
+    option: [],
+    isFavorite: false
+};
+
 export default class PointController {
   constructor(container, onDataChange, onViewChange) {
     this._container = container;
@@ -40,6 +54,9 @@ export default class PointController {
     });
 
     this._cardEditComponent.setSubmitHandler(() => this._replaceEditToCard());
+
+    this._cardEditComponent.setDeleteButtonClickHandler(() =>
+      this._onDataChange(this, card, null));
 
     if (oldCardEditComponent && oldCardComponent) {
       replace(this._cardComponent, oldCardComponent);

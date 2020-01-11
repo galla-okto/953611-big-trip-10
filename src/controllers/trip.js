@@ -1,4 +1,4 @@
-import PointController from './point.js';
+import PointController, {EmptyPoint} from './point.js';
 import TripDaysComponent from '../components/trip-days.js';
 import {render, RenderPosition} from '../utils/render.js';
 
@@ -19,6 +19,7 @@ export default class TripController {
 
     this._showedPointsControllers = [];
     this._pointsComponent = new TripDaysComponent();
+    this._creatingPoint = null;
 
     this._onDataChange = this._onDataChange.bind(this);
     this._onViewChange = this._onViewChange.bind(this);
@@ -50,11 +51,29 @@ export default class TripController {
     this._showedPointsControllers = this._showedPointsControllers.concat(newPoints);
   }
 
-  _onDataChange(pointController, oldData, newData) {
-    const isSuccess = this._pointsModel.updatePoint(oldData.id, newData);
+  _updatePoints(count) {
+    this._removePoints();
+    this._renderPoints(this._pointsModel.getPoints().slice(0, count));
+  }
 
-    if (isSuccess) {
-      pointController.render(newData);
+  _onDataChange(pointController, oldData, newData) {
+    if (oldData === EmptyPoint) {
+      this._removePoints = null;
+      if (newData === null) {
+        pointController.destroy();
+        this._updatePoints(5);
+      } else {
+
+      }
+    } else if (newData === null) {
+      this._pointsModel.removePoint(oldData.id);
+      this._updatePoints(5);
+    } else {
+      const isSuccess = this._pointsModel.updatePoint(oldData.id, newData);
+
+      if (isSuccess) {
+        pointController.render(newData);
+      }
     }
   }
 
