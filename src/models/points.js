@@ -1,7 +1,7 @@
 import {getPointsByFilter} from '../utils/filter.js';
 import {FilterType} from '../const.js';
 
-export default class Points {
+export default class PointsModel {
   constructor() {
     this._points = [];
     this._activeFilterType = FilterType.EVERYTHING;
@@ -28,13 +28,13 @@ export default class Points {
   }
 
   removePoint(id) {
-    const index = this.points.findIndex((it) => it.id === id);
+    const index = this._points.findIndex((it) => it.id === id);
 
     if (index === -1) {
       return false;
     }
 
-    this.points = [].concat(this.points.slice(0, index), this.points.slice(index + 1));
+    this._points = [].concat(this._points.slice(0, index), this._points.slice(index + 1));
 
     this._callHandlers(this._dataChangeHandlers);
 

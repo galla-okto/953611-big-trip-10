@@ -12,7 +12,6 @@ import PointsModel from './models/points.js';
 
 import {generateCards} from './mock/card.js';
 import {generateSiteMenu} from './mock/site-menu.js';
-import {generateFilters} from './mock/filter.js';
 import {generateInfoTrip} from './mock/info-trip.js';
 import {render, RenderPosition} from './utils/render.js';
 
