@@ -1,12 +1,14 @@
-import PointController, {EmptyPoint} from './point.js';
+import PointController, {Mode as PointControllerMode, EmptyPoint} from './point.js';
 import TripDaysComponent from '../components/trip-days.js';
 import {render, RenderPosition} from '../utils/render.js';
+
+const SHOWING_POINTS_COUNT_ON_START = 5;
 
 const renderPoints = (pointListElement, points, onDataChange, onViewChange) => {
   return points.map((point) => {
     const pointController = new PointController(pointListElement, onDataChange, onViewChange);
 
-    pointController.render(point);
+    pointController.render(point, PointControllerMode.DEFAULT);
 
     return pointController;
   });
@@ -18,6 +20,7 @@ export default class TripController {
     this._pointsModel = pointsModel;
 
     this._showedPointsControllers = [];
+    this._showingPointsCount = SHOWING_POINTS_COUNT_ON_START;
     this._pointsComponent = new TripDaysComponent();
     this._creatingPoint = null;
 
@@ -35,6 +38,16 @@ export default class TripController {
     render(container, this._pointsComponent, RenderPosition.BEFOREEND);
 
     this._renderPoints(points);
+  }
+
+  createPoint() {
+    if (this._creatingPoint) {
+      return;
+    }
+
+    const pointListElement = this._pointsComponent.getElement();
+    this._creatingPoint = new PointController(pointListElement, this._onDataChange, this._onViewChange);
+    this._creatingPoint.render(EmptyPoint, PointControllerMode.ADDING);
   }
 
   _removePoints() {
@@ -58,16 +71,23 @@ export default class TripController {
 
   _onDataChange(pointController, oldData, newData) {
     if (oldData === EmptyPoint) {
-      this._removePoints = null;
+      this._creatingPoint = null;
+
       if (newData === null) {
         pointController.destroy();
-        this._updatePoints(5);
+        this._updatePoints(this._showingPointsCount);
       } else {
+        this._pointsModel.addPoint(newData);
+        pointController.render(newData, PointControllerMode.DEFAULT);
 
+        const destroyedPoint = this._showedPointControllers.pop();
+        destroyedPoint.destroy();
+        this._showedPointControllers = [].concat(pointController, this._showedPointControllers);
+        this._showingPointsCount = this._showedPointControllers.length;
       }
     } else if (newData === null) {
       this._pointsModel.removePoint(oldData.id);
-      this._updatePoints(5);
+      this._updatePoints(this._showingPointsCount);
     } else {
       const isSuccess = this._pointsModel.updatePoint(oldData.id, newData);
 
@@ -82,7 +102,6 @@ export default class TripController {
   }
 
   _onFilterChange() {
-    this._removePoints();
-    this._renderPoints(this._pointsModel.getPoints());
+    this._updatePoints(SHOWING_POINTS_COUNT_ON_START);
   }
 }

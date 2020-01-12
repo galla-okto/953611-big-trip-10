@@ -27,6 +27,10 @@ const siteHeaderElement = document.querySelector(`.trip-main`);
 const siteTripInfoElement = siteHeaderElement.querySelector(`.trip-info`);
 const siteTripControlsElement = siteHeaderElement.querySelector(`.trip-controls`);
 
+siteHeaderElement.querySelector(`.trip-main__event-add-btn`).addEventListener(`click`, () => {
+  tripController.createPoint();
+});
+
 const cards = generateCards(CARD_COUNT);
 const pointsModel = new PointsModel();
 pointsModel.setPoints(cards);

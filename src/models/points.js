@@ -20,6 +20,7 @@ export default class PointsModel {
 
   setPoints(points) {
     this._points = Array.from(points);
+    this._callHandlers(this._dataChangeHandlers);
   }
 
   setFilter(filterType) {
@@ -53,6 +54,11 @@ export default class PointsModel {
     this._callHandlers(this._dataChangeHandlers);
 
     return true;
+  }
+
+  addPoint(point) {
+    this._points = [].concat(point, this._points);
+    this._callHandlers(this._dataChangeHandlers);
   }
 
   setFilterChangeHandler(handler) {
