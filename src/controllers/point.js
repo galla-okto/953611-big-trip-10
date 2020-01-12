@@ -9,17 +9,17 @@ export const Mode = {
 };
 
 export const EmptyPoint = {
-    id: null,
-    type: null,
-    town: null,
-    photos: [],
-    description: ``,
-    date: null,
-    timeIn: null,
-    timeOut: null,
-    price: null,
-    option: [],
-    isFavorite: false
+  id: null,
+  type: null,
+  town: null,
+  photos: [],
+  description: ``,
+  date: null,
+  timeIn: null,
+  timeOut: null,
+  price: null,
+  option: [],
+  isFavorite: false
 };
 
 export default class PointController {
@@ -124,7 +124,6 @@ export default class PointController {
         this._onDataChange(this, EmptyPoint, null);
       }
       this._replaceEditToCard();
-      //document.removeEventListener(`keydown`, this._onEscKeyDown);
     }
   }
 }

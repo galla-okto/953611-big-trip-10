@@ -54,10 +54,8 @@ export default class CardEdit extends AbstractSmartComponent {
 
   getData() {
     const form = this.getElement().querySelector(`form`);
-    const form22 = new FormData(form);
-    //for(let [name, value] of form22) {
-    //  alert(`${name} = ${value}`)}
-    return form22;
+
+    return  new FormData(form);
   }
 
   setSubmitHandler(handler) {
