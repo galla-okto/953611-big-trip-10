@@ -26,8 +26,8 @@ const getPlaceholder = (eventType) => {
   return placeholder[eventType];
 };
 
-export const createEventHeaderTemplate = (card, eventType) => {
-  const {town, date, timeIn, timeOut, price, isFavorite} = card;
+export const createEventHeaderTemplate = (card, eventType, eventTown) => {
+  const {date, timeIn, timeOut, price, isFavorite} = card;
 
   const townsOption = towns.map((it) => сreateTownsOption(it)).join(`\n`);
   const placeholderText = getPlaceholder(eventType);
@@ -106,7 +106,7 @@ export const createEventHeaderTemplate = (card, eventType) => {
         <label class="event__label  event__type-output" for="event-destination-1">
           ${placeholderText}
         </label>
-        <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${town}" list="destination-list-1">
+        <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${eventTown}" list="destination-list-1">
         <datalist id="destination-list-1">
           ${townsOption}
         </datalist>

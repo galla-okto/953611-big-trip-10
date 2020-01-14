@@ -19,3 +19,9 @@ export const towns = [
   `Amsterdam`,
   `Saint Petersburg`
 ];
+
+export const FilterType = {
+  EVERYTHING: `everything`,
+  FUTURE: `future`,
+  PAST: `past`,
+};

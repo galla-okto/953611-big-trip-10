@@ -90,6 +90,7 @@ const getPhotos = () => {
 const generateCard = () => {
 
   return {
+    id: String(new Date() + Math.random()),
     type: getRandomArrayItem(types),
     town: getRandomArrayItem(towns),
     photos: getPhotos(),

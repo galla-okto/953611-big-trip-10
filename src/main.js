@@ -1,5 +1,5 @@
 import InfoTripComponent from './components/info-trip.js';
-import FilterComponent from './components/filter.js';
+import FilterController from './controllers/filter.js';
 import SiteMenuComponent from './components/site-menu.js';
 import TripDaysComponent from './components/trip-days.js';
 
@@ -8,9 +8,10 @@ import {createTripSortTemplate} from './components/trip-sort.js';
 import {calculatePriceTrip} from './components/price-trip.js';
 import {createPriceTripTemplate} from './components/price-trip.js';
 
+import PointsModel from './models/points.js';
+
 import {generateCards} from './mock/card.js';
 import {generateSiteMenu} from './mock/site-menu.js';
-import {generateFilters} from './mock/filter.js';
 import {generateInfoTrip} from './mock/info-trip.js';
 import {render, RenderPosition} from './utils/render.js';
 
@@ -26,7 +27,13 @@ const siteHeaderElement = document.querySelector(`.trip-main`);
 const siteTripInfoElement = siteHeaderElement.querySelector(`.trip-info`);
 const siteTripControlsElement = siteHeaderElement.querySelector(`.trip-controls`);
 
+siteHeaderElement.querySelector(`.trip-main__event-add-btn`).addEventListener(`click`, () => {
+  tripController.createPoint();
+});
+
 const cards = generateCards(CARD_COUNT);
+const pointsModel = new PointsModel();
+pointsModel.setPoints(cards);
 
 const infoTrip = generateInfoTrip(cards);
 render(siteTripInfoElement, new InfoTripComponent(infoTrip), RenderPosition.AFTERBEGIN);
@@ -34,8 +41,8 @@ render(siteTripInfoElement, new InfoTripComponent(infoTrip), RenderPosition.AFTE
 const priceTrip = calculatePriceTrip(cards);
 renderHtml(siteTripInfoElement, createPriceTripTemplate(priceTrip), RenderPosition.BEFOREEND);
 
-const filters = generateFilters();
-render(siteTripControlsElement, new FilterComponent(filters), RenderPosition.AFTERBEGIN);
+const filterController = new FilterController(siteTripControlsElement, pointsModel);
+filterController.render();
 
 const siteMenu = generateSiteMenu();
 render(siteTripControlsElement, new SiteMenuComponent(siteMenu), RenderPosition.AFTERBEGIN);
@@ -48,6 +55,6 @@ renderHtml(siteTripEventsElement, createTripSortTemplate(), RenderPosition.AFTER
 const tripDaysComponent = new TripDaysComponent;
 render(siteTripEventsElement, tripDaysComponent, RenderPosition.BEFOREEND);
 
-const tripController = new TripController(tripDaysComponent);
+const tripController = new TripController(tripDaysComponent, pointsModel);
 
-tripController.render(cards);
+tripController.render();

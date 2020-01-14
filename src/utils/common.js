@@ -32,3 +32,11 @@ export const getRandomTime = () => {
 
   return targetDate.getHours() + ` ` + targetDate.getMinutes();
 };
+
+export const isPast = (dueDate, date) => {
+  return dueDate < date;
+};
+
+export const isFuture = (dueDate, date) => {
+  return dueDate > date;
+};

@@ -9,7 +9,7 @@ const createCardEditTemplate = (card, options = {}) => {
 
   return (`<div>
   <form class="event event--edit" action="#" method="post">
-  ${createEventHeaderTemplate(card, activeEventType)}
+  ${createEventHeaderTemplate(card, activeEventType, activeDestination)}
   <section class="event__details">
   ${createOffersTemplate(card, activeEventType)}
   ${createDestinationTemplate(card, activeDestination)}
@@ -24,7 +24,9 @@ export default class CardEdit extends AbstractSmartComponent {
 
     this._card = card;
     this._activeEventType = card.type;
-    this._activeDestination = card.destination;
+    this._activeDestination = card.town;
+    this._submitHandler = null;
+    this._deleteButtonClickHandler = null;
 
     this._subscribeOnEvents();
   }
@@ -36,7 +38,13 @@ export default class CardEdit extends AbstractSmartComponent {
     });
   }
 
+  removeElement() {
+    super.removeElement();
+  }
+
   recoveryListeners() {
+    this.setSubmitHandler(this._submitHandler);
+    this.setDeleteButtonClickHandler(this._deleteButtonClickHandler);
     this._subscribeOnEvents();
   }
 
@@ -44,8 +52,22 @@ export default class CardEdit extends AbstractSmartComponent {
     super.rerender();
   }
 
+  getData() {
+    const form = this.getElement().querySelector(`form`);
+
+    return new FormData(form);
+  }
+
   setSubmitHandler(handler) {
     this.getElement().querySelector(`form`).addEventListener(`submit`, handler);
+
+    this._submitHandler = handler;
+  }
+
+  setDeleteButtonClickHandler(handler) {
+    this.getElement().querySelector(`.event__reset-btn`).addEventListener(`click`, handler);
+
+    this._deleteButtonClickHandler = handler;
   }
 
   setFavoritesButtonClickHandler(handler) {
