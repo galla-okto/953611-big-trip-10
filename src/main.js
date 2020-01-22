@@ -58,5 +58,3 @@ render(siteTripEventsElement, tripDaysComponent, RenderPosition.BEFOREEND);
 const tripController = new TripController(tripDaysComponent, pointsModel);
 
 tripController.render();
-
-// comment
